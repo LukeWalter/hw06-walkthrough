@@ -90,7 +90,6 @@ public class LambdaFun {
 
         Function<Email, String> efunc = email -> { return email.getSender(); };
         
-//----------------------------------------------------------------------------------------- 
         
         // printlnMatches is a generic method, so the
         // generic type T needs to be replaced before
@@ -131,8 +130,6 @@ public class LambdaFun {
         // 
         // [?] What should be printed in place of the email's memory address?
 
-//-----------------------------------------------------------------------------------------
-
     } // main
 
     /**
@@ -158,6 +155,7 @@ public class LambdaFun {
 
     } // printlnMatches
 
+//-----------------------------------------------------------------------------------------
 
     /**
      * Prints the elements of the array that pass the test specified by the given predicate
@@ -172,8 +170,35 @@ public class LambdaFun {
      * @throws NullPointerException if the specified predicate or string mapper is {@code null}
      */
     private static <T> void printlnMappedMatches(T[] t, Predicate<T> p, Function<T, String> f) {
-        throw new UnsupportedOperationException("not yet implemented");
+        
+        // Access each object in "t"
+
+        for (T obj : t) {
+
+            // Print if the object passes the test defined in "p"
+
+            if (p.test(obj)) {
+                
+                // Print a string representation of the object as defined in "f"
+
+                System.out.println(f.apply(obj));
+
+            } // if
+
+        } // for
+
+        // When this method is actually called, the T values
+        // in "t", "p", and "f" will change depending on what 
+        // data type is used. In any case, the Predicate should
+        // be checking the same kind of object that is stored in
+        // the array, as both contain T. Additionally, the Function
+        // will take in that same type as an input, but it will 
+        // return a String regardless of what type T becomes.
+        //
+        // In this example, "t" is inbox, "p" is e, and "f" is efunc. 
 
     } // printlnMappedMatches
+
+//-----------------------------------------------------------------------------------------
 
 } // LambdaFun
