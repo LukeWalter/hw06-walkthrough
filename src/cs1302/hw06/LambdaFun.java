@@ -41,8 +41,8 @@ public class LambdaFun {
 
         Integer[] myInts = { -3, -2, -1, 0, 1, 2, 3 };
 
-        Predicate<Integer> i = x -> { return x >= 0; };        
-        LambdaFun.<Integer>printlnMatches(myInts, i);
+        Predicate<Integer> i1 = x -> { return x >= 0; };        
+        LambdaFun.<Integer>printlnMatches(myInts, i1);
         System.out.println();
 
         Predicate<String> s1 = str -> { return str.length() > 3; };
@@ -53,11 +53,41 @@ public class LambdaFun {
         LambdaFun.<String>printlnMatches(myStrings, s2);
         System.out.println();
 
-
-        Predicate<Email> e = email -> { return email.getSender().contains("@uga.edu"); };
-        Function<Email, String> efunc = email -> { return email.getSender(); };
-        LambdaFun.<Email>printlnMappedMatches(inbox, e, efunc);
+        Predicate<Email> e1 = email -> { return email.getSender().contains("@uga.edu"); };
+        Function<Email, String> efunc1 = email -> { return email.getSender(); };
+        LambdaFun.<Email>printlnMappedMatches(inbox, e1, efunc1);
         System.out.println();
+
+
+//-----------------------------------------------------------------------------------------
+
+        // Extra examples
+
+        // [?] What is the purpose of each predicate?
+        // How will they affect what is printed 
+        // by printlnMappedMatches?
+        //
+        // [?] What is the purpose of each function?
+        // How will they affect what is printed 
+        // by printlnMappedMatches?
+        
+        Predicate<Email> e2 = email -> { return email.getContents().contains("GA"); };
+        Function<Email, String> efunc2 = email -> { return email.getDateSent().toString(); };
+        LambdaFun.<Email>printlnMappedMatches(inbox, e2, efunc2);
+        System.out.println();
+
+        Predicate<String> s3 = str -> { return str.contains("s"); };
+        Function<String, String> strfunc = str -> { return str + str; };
+        LambdaFun.<String>printlnMappedMatches(myStrings, s3, strfunc);
+        System.out.println();
+
+        Predicate<Integer> i2 = x -> { return true; };
+        Function<Integer, String> ifunc = x -> { return "" + (x * x); };
+        LambdaFun.<Integer>printlnMappedMatches(myInts, i2, ifunc);
+        System.out.println();
+
+//-----------------------------------------------------------------------------------------
+
 
     } // main
 
