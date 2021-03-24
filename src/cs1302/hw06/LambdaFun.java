@@ -73,9 +73,7 @@ public class LambdaFun {
         // This is a valid lambda expression for the 
         // reference type Predicate<Integer>.
 
-        Predicate<Integer> i = x -> { return x >= 0; };
-  
-//-----------------------------------------------------------------------------------------        
+        Predicate<Integer> i = x -> { return x >= 0; };        
 
         // Array of integer values to test printlnMatches.
         // [?] Why is the data type Integer instead of int?
@@ -108,6 +106,8 @@ public class LambdaFun {
 
     } // main
 
+//-----------------------------------------------------------------------------------------
+
     /**
      * Prints the elements of the array that pass the test specified by the given predicate.
      * More formally, this method prints all elements {@code e} in the array referred to by
@@ -119,7 +119,94 @@ public class LambdaFun {
      * @throws NullPointerException if the specified predicate is {@code null}
      */
     private static <T> void printlnMatches(T[] t, Predicate<T> p) {
-        throw new UnsupportedOperationException("not yet implemented");
+        
+        // Access each object in T[] t
+
+        for (T obj : t) {
+
+            // Print the object if it passes the test defined in p
+
+            if (p.test(obj)) {
+                System.out.println(obj);
+
+            } // if
+
+        } // for
+
+        // When this method is actually called, the T values
+        // in "t" and "p" will change depending on what 
+        // data type is used. In any case, the predicate should
+        // be checking the same kind of object that is stored in
+        // the array, as both contain T.
+        //
+        // In the example, "t" is myInts, and
+        // "p" is i. 
+        //
+        // Tracing for the example:
+        //
+        //
+        // -3   -2   -1    0    1    2    3 
+        // ___  ___  ___  ___  ___  ___  ___
+        //  ^
+        //  |
+        // 
+        // (-3 >= 0) is false, p.test(-3) returns false
+        // nothing is printed
+        //
+        //
+        // -3   -2   -1    0    1    2    3 
+        // ___  ___  ___  ___  ___  ___  ___
+        //       ^
+        //       |
+        // 
+        // (-2 >= 0) is false, p.test(-2) returns false
+        // nothing is printed
+        //
+        //
+        // -3   -2   -1    0    1    2    3 
+        // ___  ___  ___  ___  ___  ___  ___
+        //            ^
+        //            |
+        // 
+        // (-1 >= 0) is false, p.test(-1) returns false
+        // nothing is printed
+        //
+        //
+        // -3   -2   -1    0    1    2    3 
+        // ___  ___  ___  ___  ___  ___  ___
+        //                 ^
+        //                 |
+        // 
+        // (0 >= 0) is true, p.test(0) returns true
+        // 0 is printed
+        //
+        //
+        // -3   -2   -1    0    1    2    3 
+        // ___  ___  ___  ___  ___  ___  ___
+        //                      ^
+        //                      |
+        // 
+        //
+        // (1 >= 0) is true, p.test(1) returns true
+        // 1 is printed
+        //
+        // -3   -2   -1    0    1    2    3 
+        // ___  ___  ___  ___  ___  ___  ___
+        //                           ^
+        //                           | 
+        // 
+        //
+        // (2 >= 0) is true, p.test(2) returns true
+        // 2 is printed
+        //
+        //
+        // -3   -2   -1    0    1    2    3 
+        // ___  ___  ___  ___  ___  ___  ___
+        //                                ^
+        //                                |
+        // 
+        // (3 >= 0) is true, p.test(3) returns true
+        // 3 is printed
 
     } // printlnMatches
 
