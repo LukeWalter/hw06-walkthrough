@@ -53,7 +53,6 @@ public class LambdaFun {
         LambdaFun.<String>printlnMatches(myStrings, s2);
         System.out.println();
 
-//-----------------------------------------------------------------------------------------
 
         Predicate<Email> e = email -> { return email.getSender().contains("@uga.edu"); };
         
@@ -91,9 +90,46 @@ public class LambdaFun {
 
         Function<Email, String> efunc = email -> { return email.getSender(); };
         
+//----------------------------------------------------------------------------------------- 
         
-        LambdaFun.<Email>printlnMatches(inbox, e);
+        // printlnMatches is a generic method, so the
+        // generic type T needs to be replaced before
+        // the method is usable.
+        //
+        // Using Email in place of T would result in
+        // the following method signature:
+        //
+        // private static void printlnMatches(Email[] t, Predicate<Email> p, Function<Email, String> f)
+        //
+        // Input: Integer[], Predicate<T>, Function<Email, String>
+        // Output: None
+        //
+        // [!] Note that the original version of "f"
+        // from the generic method header is
+        // Function<T, String>. This means that the 
+        // input will change based on T, but the output
+        // of the Function must always be a String to 
+        // be a valid argument for printlnMappedMatches.
+        // 
+        // Because "inbox" is an Email[],
+        // "e" is a Predicate<Email>, and "efunc" 
+        // is a Function<Email, String>, they can
+        // be used as input arguments for the 
+        // <Email>printlnMappedMatches method.
+
+        LambdaFun.<Email>printlnMappedMatches(inbox, e, efunc);
         System.out.println();
+
+        // The function of "e" is to check whether or
+        // not the sender of the email is addressed as @uga.edu.
+        //
+        // [?] Which elements of "inbox" should be printed 
+        // when printlnMappedMatches is executed?
+        //
+        // The function of "efunc" is to return the sender's address
+        // when given an email.
+        // 
+        // [?] What should be printed in place of the email's memory address?
 
 //-----------------------------------------------------------------------------------------
 
