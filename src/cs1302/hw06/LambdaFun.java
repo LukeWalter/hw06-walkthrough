@@ -41,53 +41,55 @@ public class LambdaFun {
 
         Integer[] myInts = { -3, -2, -1, 0, 1, 2, 3 };
 
+
+        // printlnMatches examples
+
+        System.out.println("Test: <Integer>printlnMatches (positive #'s)");
         Predicate<Integer> i1 = x -> { return x >= 0; };        
         LambdaFun.<Integer>printlnMatches(myInts, i1);
         System.out.println();
 
+        System.out.println("Test: <String>printlnMatches (length > 3)");
         Predicate<String> s1 = str -> { return str.length() > 3; };
         LambdaFun.<String>printlnMatches(myStrings, s1);
         System.out.println();
 
+        System.out.println("Test: <String>printlnMatches (ends with an e)");
         Predicate<String> s2 = str -> { return str.endsWith("e"); };
         LambdaFun.<String>printlnMatches(myStrings, s2);
         System.out.println();
 
+        System.out.println("Test: <Email>printlnMatches (from @uga.edu)");
         Predicate<Email> e1 = email -> { return email.getSender().contains("@uga.edu"); };
-        Function<Email, String> efunc1 = email -> { return email.getSender(); };
-        LambdaFun.<Email>printlnMappedMatches(inbox, e1, efunc1);
+        LambdaFun.<Email>printlnMatches(inbox, e1);
         System.out.println();
 
-
-//-----------------------------------------------------------------------------------------
-
-        // Extra examples
-
-        // [?] What is the purpose of each predicate?
-        // How will they affect what is printed 
-        // by printlnMappedMatches?
-        //
-        // [?] What is the purpose of each function?
-        // How will they affect what is printed 
-        // by printlnMappedMatches?
         
-        Predicate<Email> e2 = email -> { return email.getContents().contains("GA"); };
-        Function<Email, String> efunc2 = email -> { return email.getDateSent().toString(); };
-        LambdaFun.<Email>printlnMappedMatches(inbox, e2, efunc2);
+        // printlnMappedMatches examples
+
+        System.out.println("Test: <Email>printlnMappedMatches (from @uga.edu, print sender)");
+        Predicate<Email> e2 = email -> { return email.getSender().contains("@uga.edu"); };
+        Function<Email, String> efunc1 = email -> { return email.getSender(); };
+        LambdaFun.<Email>printlnMappedMatches(inbox, e2, efunc1);
         System.out.println();
 
+        System.out.println("Test: <Email>printlnMappedMatches (email contains GA, print date)");
+        Predicate<Email> e3 = email -> { return email.getContents().contains("GA"); };
+        Function<Email, String> efunc2 = email -> { return email.getDateSent().toString(); };
+        LambdaFun.<Email>printlnMappedMatches(inbox, e3, efunc2);
+        System.out.println();
+
+        System.out.println("Test: <String>printlnMappedMatches (contains s, print string twice)");
         Predicate<String> s3 = str -> { return str.contains("s"); };
         Function<String, String> strfunc = str -> { return str + str; };
         LambdaFun.<String>printlnMappedMatches(myStrings, s3, strfunc);
         System.out.println();
 
+        System.out.println("Test: <Integer>printlnMappedMatches (no filter, print x^2)");
         Predicate<Integer> i2 = x -> { return true; };
         Function<Integer, String> ifunc = x -> { return "" + (x * x); };
         LambdaFun.<Integer>printlnMappedMatches(myInts, i2, ifunc);
         System.out.println();
-
-//-----------------------------------------------------------------------------------------
-
 
     } // main
 
