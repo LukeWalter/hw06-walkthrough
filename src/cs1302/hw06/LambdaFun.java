@@ -39,8 +39,6 @@ public class LambdaFun {
                       LocalDate.of(2019, 2, 8), "Go GA Tech!")
         };
 
-//-----------------------------------------------------------------------------------------
-
         // The Predicate interface is used to test some
         // object to see if it meets some condition.
         //
@@ -62,21 +60,51 @@ public class LambdaFun {
         // Output: boolean
         //
         // [!] The name of the input variables in a method
-        // signature are arbitrary. The variable "t" in the
-        // test method could be anything as long as it is 
-        // still an integer.
+        // signature for an implementing class is arbitrary. 
+        // The variable "t" in the test method could be named
+        // anything as long as it still represents an integer.
         // 
         // The lambda expression for the variable "i" 
         // tests whether or not its input variable is a
         // positive integer.
+        //
+        // The input, "x", is an integer,
+        // and the method stored in "i" returns a boolean.
+        // This is a valid lambda expression for the 
+        // reference type Predicate<Integer>.
 
         Predicate<Integer> i = x -> { return x >= 0; };
-        
-        // Try inputting different values for a!
-        int a = -1;
-        System.out.println(i.test(a));
+  
+//-----------------------------------------------------------------------------------------        
 
-//-----------------------------------------------------------------------------------------
+        // Array of integer values to test printlnMatches.
+        // [?] Why is the data type Integer instead of int?
+        Integer[] myInts = { -3, -2, -1, 0, 1, 2, 3 };
+
+        // printlnMatches is a generic method, so the
+        // generic type T needs to be replaced before
+        // the method is usable.
+        //
+        // Using Integer in place of T would result in
+        // the following method signature:
+        //
+        // private static void printlnMatches(Integer[] t, Predicate<Integer> p)
+        //
+        // Input: Integer[], Predicate<T>
+        // Output: None
+        // 
+        // Because "myInts" is an Integer[], and
+        // "i" is a Predicate<Integer>, they can
+        // be used as input arguments for the 
+        // <Integer>printlnMatches method.
+
+        LambdaFun.<Integer>printlnMatches(myInts, i);
+
+        // The function of "i" is to check whether or
+        // not an integer is positive.
+        //
+        // Which elements of "myInts" should be printed 
+        // when printlnMatches is executed?
 
     } // main
 
@@ -94,6 +122,8 @@ public class LambdaFun {
         throw new UnsupportedOperationException("not yet implemented");
 
     } // printlnMatches
+
+//-----------------------------------------------------------------------------------------
 
     /**
      * Prints the elements of the array that pass the test specified by the given predicate
