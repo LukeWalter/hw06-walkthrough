@@ -55,80 +55,9 @@ public class LambdaFun {
 
 
         Predicate<Email> e = email -> { return email.getSender().contains("@uga.edu"); };
-        
-
-        // The Function interface is used to create a 
-        // method with a customizable input and output.
-        //
-        // Function<T, R> contains the abstract method
-        // [R apply(T t)]
-        // Input: T (Input object type)
-        // Output: R (Output object type)
-        // 
-        // Implementing classes of Function<T, R> must provide:
-        // (a) A data type to replace the generic type T
-        // (b) A data type to replace the generic type R
-        // (c) An implementation for the abstract method
-        // 
-        // Example: Function<Email, String> efunc
-        //
-        // Email replaces T, and String replaces R, so 
-        // the implementing class contains this method signature:
-        // [String apply(Email t)]
-        // Input: Email 
-        // Output: String
-        //
-        // [!] The name of the input variables in a method
-        // signature are arbitrary. The variable "t" in the
-        // test method could be anything as long as it is 
-        // still an integer.
-        // 
-        // The lambda expression for the variable "efunc" 
-        // obtains the "sender" variable (a String) from 
-        // the "email" object and returns it.
-        // (See getSender() in the Email class)
-
         Function<Email, String> efunc = email -> { return email.getSender(); };
-        
-        
-        // printlnMatches is a generic method, so the
-        // generic type T needs to be replaced before
-        // the method is usable.
-        //
-        // Using Email in place of T would result in
-        // the following method signature:
-        //
-        // private static void printlnMatches(Email[] t, Predicate<Email> p, Function<Email, String> f)
-        //
-        // Input: Integer[], Predicate<T>, Function<Email, String>
-        // Output: None
-        //
-        // [!] Note that the original version of "f"
-        // from the generic method header is
-        // Function<T, String>. This means that the 
-        // input will change based on T, but the output
-        // of the Function must always be a String to 
-        // be a valid argument for printlnMappedMatches.
-        // 
-        // Because "inbox" is an Email[],
-        // "e" is a Predicate<Email>, and "efunc" 
-        // is a Function<Email, String>, they can
-        // be used as input arguments for the 
-        // <Email>printlnMappedMatches method.
-
         LambdaFun.<Email>printlnMappedMatches(inbox, e, efunc);
         System.out.println();
-
-        // The function of "e" is to check whether or
-        // not the sender of the email is addressed as @uga.edu.
-        //
-        // [?] Which elements of "inbox" should be printed 
-        // when printlnMappedMatches is executed?
-        //
-        // The function of "efunc" is to return the sender's address
-        // when given an email.
-        // 
-        // [?] What should be printed in place of the email's memory address?
 
     } // main
 
@@ -155,8 +84,6 @@ public class LambdaFun {
 
     } // printlnMatches
 
-//-----------------------------------------------------------------------------------------
-
     /**
      * Prints the elements of the array that pass the test specified by the given predicate
      * using a string mapper. More formally, this method prints the string mapped elements
@@ -170,35 +97,16 @@ public class LambdaFun {
      * @throws NullPointerException if the specified predicate or string mapper is {@code null}
      */
     private static <T> void printlnMappedMatches(T[] t, Predicate<T> p, Function<T, String> f) {
-        
-        // Access each object in "t"
 
         for (T obj : t) {
 
-            // Print if the object passes the test defined in "p"
-
             if (p.test(obj)) {
-                
-                // Print a string representation of the object as defined in "f"
-
                 System.out.println(f.apply(obj));
 
             } // if
 
         } // for
 
-        // When this method is actually called, the T values
-        // in "t", "p", and "f" will change depending on what 
-        // data type is used. In any case, the Predicate should
-        // be checking the same kind of object that is stored in
-        // the array, as both contain T. Additionally, the Function
-        // will take in that same type as an input, but it will 
-        // return a String regardless of what type T becomes.
-        //
-        // In this example, "t" is inbox, "p" is e, and "f" is efunc. 
-
     } // printlnMappedMatches
-
-//-----------------------------------------------------------------------------------------
 
 } // LambdaFun
