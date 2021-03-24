@@ -41,28 +41,62 @@ public class LambdaFun {
 
         Integer[] myInts = { -3, -2, -1, 0, 1, 2, 3 };
 
-
-
         Predicate<Integer> i = x -> { return x >= 0; };        
         LambdaFun.<Integer>printlnMatches(myInts, i);
         System.out.println();
-
 
         Predicate<String> s1 = str -> { return str.length() > 3; };
         LambdaFun.<String>printlnMatches(myStrings, s1);
         System.out.println();
 
-
         Predicate<String> s2 = str -> { return str.endsWith("e"); };
         LambdaFun.<String>printlnMatches(myStrings, s2);
         System.out.println();
 
+//-----------------------------------------------------------------------------------------
 
         Predicate<Email> e = email -> { return email.getSender().contains("@uga.edu"); };
+        
+
+        // The Function interface is used to create a 
+        // method with a customizable input and output.
+        //
+        // Function<T, R> contains the abstract method
+        // [R apply(T t)]
+        // Input: T (Input object type)
+        // Output: R (Output object type)
+        // 
+        // Implementing classes of Function<T, R> must provide:
+        // (a) A data type to replace the generic type T
+        // (b) A data type to replace the generic type R
+        // (c) An implementation for the abstract method
+        // 
+        // Example: Function<Email, String> efunc
+        //
+        // Email replaces T, and String replaces R, so 
+        // the implementing class contains this method signature:
+        // [String apply(Email t)]
+        // Input: Email 
+        // Output: String
+        //
+        // [!] The name of the input variables in a method
+        // signature are arbitrary. The variable "t" in the
+        // test method could be anything as long as it is 
+        // still an integer.
+        // 
+        // The lambda expression for the variable "efunc" 
+        // obtains the "sender" variable (a String) from 
+        // the "email" object and returns it.
+        // (See getSender() in the Email class)
+
+        Function<Email, String> efunc = email -> { return email.getSender(); };
+        
+        
         LambdaFun.<Email>printlnMatches(inbox, e);
         System.out.println();
 
-        
+//-----------------------------------------------------------------------------------------
+
     } // main
 
     /**
