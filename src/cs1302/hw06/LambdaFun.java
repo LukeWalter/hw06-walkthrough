@@ -39,41 +39,30 @@ public class LambdaFun {
                       LocalDate.of(2019, 2, 8), "Go GA Tech!")
         };
 
-        Predicate<Integer> i = x -> { return x >= 0; };        
         Integer[] myInts = { -3, -2, -1, 0, 1, 2, 3 };
 
+
+
+        Predicate<Integer> i = x -> { return x >= 0; };        
         LambdaFun.<Integer>printlnMatches(myInts, i);
         System.out.println();
 
-//-----------------------------------------------------------------------------------------
-
-        // Extra examples
-
-        // [?] What is each predicate testing for?
-        // How will they affect which elements are
-        // printed by printlnMatches?
 
         Predicate<String> s1 = str -> { return str.length() > 3; };
         LambdaFun.<String>printlnMatches(myStrings, s1);
         System.out.println();
 
+
         Predicate<String> s2 = str -> { return str.endsWith("e"); };
         LambdaFun.<String>printlnMatches(myStrings, s2);
         System.out.println();
-        
+
+
         Predicate<Email> e = email -> { return email.getSender().contains("@uga.edu"); };
         LambdaFun.<Email>printlnMatches(inbox, e);
         System.out.println();
 
-        // [!] The Email class doesn't have a toString method.
-        // If we use the Email variant of printlnMatches, it
-        // will print out memory addresses.
-        //
-        // This issue will be fixed in the second checkpoint
-        // by implementing printlnMappedMatches.
-
-//-----------------------------------------------------------------------------------------
-
+        
     } // main
 
     /**
